@@ -22,5 +22,180 @@
   	\tableofcontents
 \end{frame}
 
+\section{Theoretical Approach}
+{
+	\subsection{Population Model}
+	{
+		\frame[t]
+		{
+			\vspace{15pt}
+			$\blacksquare$ Hold the following assumptions for true : 
+			\begin{itemize}
+				\item Each individual in the population is either \emph{susceptible} or \emph{infected}
+				\item Once infected, an individual can't recover and tries to infect other individuals 
+				\item An individual can affect any other individual in the population (\textcolor{red}{uniform topology}) 
+			\end{itemize}
+			\vspace{30pt}
+			$\blacksquare$ Graph population representation : 
+				\begin{equation}
+					G=(V,E)
+				\end{equation} 
+				with $\vert V \vert = n\in\mathbb{N}^*$\\
+				Uniform topology $\Rightarrow$ \textbf{complete graph}. 
+		}
+	}
+	\subsection{Propagation Model}
+	{
+		\frame[t]
+		{
+			\vspace{20pt}
+			$\blacksquare$ Propagation :
+			\begin{itemize}
+				\item Each infected node tries to infect one of its neighbor at the times of a \textcolor{red}{Poisson process} of intensity $\lambda>0$. 
+				\item The node's Poisson processes are independent. 
+				\item An infected node picks one of its neighbor uniformly at random when trying to infect. 
+			\end{itemize}
+			
+			\vspace{30pt}
+			$\blacksquare$ Let $X_t$ the number of infected node at time $t>0$. \\
+			\hspace{30pt} $\to$ $\{X_t\}$ is a \textbf{Markov Jump Process} on $\mathbb{R}^+$. 
+		}
+		
+		\frame[t]
+		{
+			$\blacksquare$ Markov Jump Process  on $E$ : 
+			\begin{itemize}
+				\item If, $\forall x,y\in E$ : 
+					\begin{equation}
+						p_{xy}(t) = \mathbb{P}(X_{t+s}=y \, \vert \, X_s = x)
+					\end{equation}
+					then 
+					\begin{equation}
+						\lim_{t\to 0}p_{xx}(t) = 1
+					\end{equation}
+				\item The process remains at each stage for a strictly positive time with probability $1$. 
+				\item We define the jump process's  \textbf{infinitesimal generator} as, $\forall x\neq y\in E$ 
+				\begin{equation}
+					q_{xy}= \lim_{h\to 0} \frac{p_{xy}(h)}{h}
+				\end{equation}
+				\item It defines the process \textcolor{red}{transitions rates}
+				\item Ex : queuing systems !
+			\end{itemize}
+		}
+		
+		\frame[t]
+		{
+			$\blacksquare$ Back to our propagation model : 
+			\begin{itemize}
+				\item Since :
+					\begin{equation}
+						\begin{aligned}
+							&p_{x,x-i}(t) = 0 \quad \forall{i>0}\\
+							&p_{x,x+1}(h) \propto h \\
+							&p_{x,x+1+i}(h) \propto h^i \quad \forall i >0
+						\end{aligned}
+					\end{equation}
+				\item Only non-zero transition rate is $q_{x,x+1}$
+				\item If $X_t = x>0$, the next time before an infection intent is a random variable defined as : 
+					\begin{equation}
+						\tau_x = \min_{i=1,\hdots,x} \eps_i \quad \text{ where } \eps_i \sim Exp(\lambda) \text{ (iid) }
+					\end{equation}
+					Therefore
+					\begin{equation}
+						\tau_x \sim Exp(\lambda x)
+					\end{equation}
+			\end{itemize}
+		}
+		
+		\frame[t]
+		{
+		$\blacksquare$ Back to our propagation model : 
+			\begin{itemize}
+				\item The transition succeeds if the node picks a suspectible neighbor, which happens with probability $\frac{n-x}{n-1}$ (uniform) 
+				\item Therefore : 
+					\boxedeq{red}
+					{
+						q_{x,x+1} = \lambda x \frac{n-x}{n-1}
+					}
+				\item Let $X_0=1$. The time before $m$ individuals are infected is defined as : 
+				\begin{equation}
+					T_m = \sum_{x=1}^{m-1} \frac{n-1}{\lambda x (n-x)} \eps_i
+				\end{equation}
+				where 
+				\begin{equation}
+					\eps_i \overset{i.i.d}{\sim} Exp(1)
+				\end{equation}	
+			\end{itemize}
+		}
+	}
+	\subsection{Time before complete infection}
+	{
+		\frame[t]
+		{
+			$\blacksquare$ Time before complete infection : $T_n$ which first moment is given by :
+			\boxedeq{red}
+			{
+				\E{T_n} = \sum_{x=1}^n \frac{n-1}{\lambda x(n-x)} 
+			}
+			
+			$\blacksquare$ Large population limit : 
+			\begin{equation}
+				\E{T_n} = \frac{2}{\lambda}(2\log(n) + 2\gamma + o(1))
+			\end{equation}
+			scales with $\log(n)$ !\\
+			
+			$\blacksquare$ Fluctuation : if $S_n = \lambda(T_n - \E{T_n})$ : 
+			\begin{equation}
+				\mathbb{P}(S_n\geq t) \leq e^{-\theta t}C_\theta, \quad \forall\theta\in[0,\frac{1}{2}]
+			\end{equation}
+			$\rightarrow$ exponential control around the mean value !
+			
+		}
+	}
+}
+
+\section{Applications}
+{
+	\subsection{Epidemic Propagation}
+	{
+		\frame[t]
+		{
+		
+		}
+	}
+	\subsection{Sensor Networks}
+	{
+		\frame[t]
+		{
+		
+		}
+	}
+}
+
+
+\section{Model refinement}
+{
+	\subsection{SIS approach}
+	{
+		\frame[t]
+		{
+		
+		}
+	}
+	\subsection{Arbitrary graph topology}
+	{
+		\frame[t]
+		{
+		
+		}
+	}
+	\subsection{SIR approach}
+	{
+		\frame[t]
+		{
+		
+		}
+	}
+}
 
 \end{document}
