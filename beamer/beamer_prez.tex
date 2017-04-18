@@ -151,6 +151,11 @@
 			$\rightarrow$ exponential control around the mean value !
 			
 		}
+		
+		\frame[t]
+		{
+			TODO : simulation explanation \& results
+		}
 	}
 }
 
@@ -160,14 +165,36 @@
 	{
 		\frame[t]
 		{
-		
+			\vspace{20pt}
+			$\blacksquare$ Epidemic Propagation : 
+			\vspace{10pt}
+			\begin{itemize}
+			\setlength\itemsep{1em}
+				\item Modelisation of simple epidemics in population 
+				\item Simplistic model : 
+					\begin{itemize}
+						\item<sub@1> Nodes can't recover from being infected 
+						\item<sub@1> A complete graph is not realistic 
+					\end{itemize}
+				\item What happens if we introduce recovering / dying nodes ? 
+				\item How does the topology of the graph impacts the last results ?
+			\end{itemize}
 		}
 	}
 	\subsection{Sensor Networks}
 	{
 		\frame[t]
 		{
-		
+			\vspace{30pt}
+				$\blacksquare$ Sensor Network Modelisation (All to All propagation) : 
+				\vspace{10pt}
+				\begin{itemize}
+					\setlength\itemsep{1em}
+					\item Modelling a network of sensors / agents 
+					\item Each agent tries to pass a bit of information to all others 
+					\item Control over the time before every information has been propagated to every agent 
+					\item Previous results still holds : scales as $\log{n}$
+				\end{itemize}
 		}
 	}
 }
