@@ -1,0 +1,11 @@
+* 
+!.gitignore
+
+!src/
+src/*
+!src.m
+
+!beamer
+beamer/*
+!*.tex
+!*.pdf
