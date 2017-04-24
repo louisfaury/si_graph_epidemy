@@ -202,25 +202,91 @@
 
 \section{Model refinement}
 {
+	\frame[t]
+	{
+		\vspace{20pt}
+		$\blacksquare$ Critics
+		\vspace{10pt}
+		\begin{itemize}
+			\setlength\itemsep{1em}
+			\item The SI approach is not realistic !
+			\item More realistic models : SIS (Susceptible-Infected-Susceptible), SIR (Susceptible-Infected-Removed)
+			\item Complete topology assumption does not hold (sparser graph, community)
+		\end{itemize}
+	}
 	\subsection{SIS approach}
 	{
 		\frame[t]
 		{
+			$\blacksquare$ SIS (Susceptible-Infected-Susceptible approach) on general topology: 
+			\begin{itemize}
+				\item Let $G=(V,E)$ a graph with adjacency matrix $A \in \mathcal{M}_{\vert V \vert }(\mathbb{R})$
+					\begin{equation}
+						A = (\delta _{(v_i,v_j)\in E})_{i,j}
+					\end{equation}
+				\item $\{X(t)\}_t \in\{0,1\}^{\vert V \vert }$ our Markovian jump process. 
+				\item Let : 
+					\begin{equation}
+						\begin{aligned}
+							&\beta    &\text{ : infection rate} \\
+							&\delta   &\text{ : remission rate} \\
+							&e_i &=(\delta_{ji})_{j\in\{1,\hdots,V\}} 
+						\end{aligned}
+					\end{equation}
+				\item Then the only non-zero infinitesimal generators are : 
+					\begin{equation}
+						\left\{
+						\begin{aligned}
+							&q_{x,x+e_i} = \beta \mathds{1}_{x_i=0} \sum_{j\in V}A_{i,j}x_j \\
+							&q_{x,x-e_i} = \delta x_i 
+						\end{aligned}\right.
+					\end{equation}
+			\end{itemize}
+		}
 		
+		\frame[t]
+		{
+			$\blacksquare$ SIS (Susceptible-Infected-Susceptible approach) on general topology: 
+			\vspace{5pt}
+			\begin{itemize}
+				\item $0^V$ is an \textcolor{red}{absorbant state} $\leftarrow$ time for absorption ? 
+				\item Spectral radius of the graph : 
+					\begin{equation}
+						\rho_G = \max_{\lambda\in Sp(A)} \vert \lambda \vert 
+					\end{equation}
+				\item \textbf{Main absorption result} : If the graph is \emph{finite} and $t>0$
+				\begin{equation}
+					\mathbb{P}(T>t) \leq ne^{t(\beta \rho - \delta)}
+				\end{equation}
+				hence if $\color{red} \boldsymbol{\beta}\boldsymbol{\rho} \leq \boldsymbol{\delta}$
+				\boxedeq{red}
+				{
+					\begin{aligned}
+						\E{T} &= \int_{0}^{+\infty} \mathbb{P}(T>t)dt \\
+							 &\leq \frac{\log{n}+1}{\delta - \beta \rho}
+					\end{aligned}
+				}
+				
+			\end{itemize}
+
 		}
 	}
 	\subsection{Arbitrary graph topology}
 	{
 		\frame[t]
 		{
-		
-		}
-	}
-	\subsection{SIR approach}
-	{
-		\frame[t]
-		{
-		
+			$\blacksquare$ SIS (Susceptible-Infected-Susceptible approach) on general topology: 
+			\vspace{10pt}
+			\begin{itemize}
+				\setlength\itemsep{1em}
+				\item More precise and complex results include the \textcolor{red}{\emph{graph's isoperimetric constant}} : $\forall m\in\{1,\hdots, n-1\} $
+				\begin{equation}
+					\eta_m(G)=  \inf_{S\subset V,\, \vert S\vert \leq m} \left\{\displaystyle \frac{\vert E(S,\bar{S})\vert }{\vert S \vert}\right\}
+				\end{equation}
+				\item Derive results of control for many different topologies (complete, hypercube, Erdos-Renyi's,$\hdots$)
+				\item Model the volatile information propagation on various network topologies 
+				\item Paves the way for SIR model
+			\end{itemize}
 		}
 	}
 }
