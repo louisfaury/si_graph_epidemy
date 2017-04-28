@@ -4,15 +4,18 @@ close all;
 
 
 %% Constants definition
-n       = 200;      %number of nodes
-nCommunities = 4;   %number of communities
-beta  = 1;        %contamination intensity
-delta    = 0.01;     %remission intensity
-x0      = 1;        %initial number of infected nodes
+n               = 500;          %number of nodes
+nCommunities    = 5;            %number of communities
+beta            = 0.25;         %contamination intensity
+delta           = 0.5;          %remission intensity
+x0              = 500;          %initial number of infected nodes
+propEdge        = 0.3;          %proportion of edges inside clusters
 
 %% Building graph (sparse topology)
-Adj     = generateSparseGraph(n, nCommunities);
+Adj     = generateSparseGraph(n, nCommunities, propEdge);
 G       = graph(Adj);
+R       = max(abs(eig(double(Adj))));
+disp(R);
 
 %% Plot generated graph
 
@@ -24,7 +27,7 @@ p1 = plot(G, '-.o','NodeLabel',{}, 'EdgeAlpha', 0.1,  'NodeColor', 'b', 'MarkerS
 
 
 %% Simulating behavior
-[nEvents, t, states, infectEdge] = simulateEvolutionSIS(n, x0, Adj, beta, delta);
+[nEvents, t, states, infectEdge, absorbed] = simulateEvolutionSIS(n, x0, Adj, beta, delta);
 
 %% Movie
 displayScenario(G, t, nEvents, states, infectEdge)
@@ -42,9 +45,15 @@ for i=1:nEvents
     highlight(p,infectedList,'NodeColor','red');
     
     % differentiate transmitter, receiver and edge
-    highlight(p, infectEdge(i,:), 'NodeColor','g','EdgeColor','g', 'LineWidth', 2, 'MarkerSize', 2)
+    if infectEdge(i,1) ~= infectEdge(i,2)
+        highlight(p, infectEdge(i,:), 'NodeColor', [1 .5 0], 'EdgeColor',[1 1 0], 'LineWidth', 4, 'MarkerSize', 5)
+        highlight(p, infectEdge(i,1), 'NodeColor','r', 'MarkerSize', 5)
+    else
+         highlight(p, infectEdge(i,1), 'NodeColor','g', 'MarkerSize', 5)
+    end
+    
     shg
-    pause(t(i+1)-t(i));
+    pause((t(i+1)-t(i))/10);
     
 end
 

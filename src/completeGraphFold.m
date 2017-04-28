@@ -41,12 +41,12 @@ varTime  = var(totalTime, 1);
 
 %% Plot results
 figure 
-
+set(0,'defaulttextInterpreter','latex')
 semilogx(n, meanTime, 'b', 'LineWidth', 2);
-xlabel('population size');
-ylabel('time')
+xlabel('n');
+ylabel('T')
 grid minor
-
+title('$E[T] = f(n)$')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                       %%   
@@ -82,4 +82,9 @@ fluct    = totalTime - meanTime;
 
 
 %% Plot histogram
-hist(abs(fluct), 100);
+figure
+set(0,'defaulttextInterpreter','latex')
+hist(fluct, 100);
+xlabel('flucutation')
+ylabel('frequency')
+title('Histogram of flucations ($n=100, \quad \lambda = 1$)')

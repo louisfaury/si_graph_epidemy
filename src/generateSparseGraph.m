@@ -1,4 +1,4 @@
-function [Adj] = generateSparseGraph(n, nCommunities)
+function [Adj] = generateSparseGraph(n, nCommunities, propEdge)
 
 Adj = zeros(n,n);
 
@@ -25,7 +25,7 @@ minIndex = 1;
 for i=1:nCommunities
     
     maxIndex = minIndex + communitySize(1,i)-1;
-    Adj(minIndex:maxIndex, minIndex:maxIndex) = randi([0,1], maxIndex-minIndex + 1,  maxIndex-minIndex + 1);
+    Adj(minIndex:maxIndex, minIndex:maxIndex) = (randi([0,100], maxIndex-minIndex + 1,  maxIndex-minIndex + 1)>(100-100*propEdge));
     minIndex = maxIndex+1;
     
 end

@@ -4,7 +4,7 @@ close all;
 
 
 %% Constants definition
-n       = 1000;     %number of nodes
+n       = 100;     %number of nodes
 lambda  = 1;        %contamination intensity
 x0      = 1;        %initial number of infected nodes
 nEvents = n-x0;     %number of events that will occur (number of contaminations)
@@ -34,16 +34,17 @@ function [] = displayScenario(G, t, nEvents, states, infectEdge)
 for i=1:nEvents
     clf
     % plot graph
-    p = plot(G, '-.o','NodeLabel',{}, 'LineWidth', 0.0001,  'NodeColor', 'b', 'MarkerSize', 5);
+    p = plot(G, '-.o','NodeLabel',{}, 'LineWidth', 0.0001,  'NodeColor', 'b', 'MarkerSize', 3);
     axis off
     % differentiate infected nodes
     infectedList = find(states(i,:)==1);
     highlight(p,infectedList,'NodeColor','red');
     
     % differentiate transmitter, receiver and edge
-    highlight(p, infectEdge(i,:), 'NodeColor','g','EdgeColor','g', 'LineWidth', 2, 'MarkerSize', 10)
+    highlight(p, infectEdge(i,:), 'NodeColor', [1 .5 0], 'EdgeColor',[1 1 0], 'LineWidth', 4, 'MarkerSize', 5)
+    highlight(p, infectEdge(i,1), 'NodeColor','r', 'MarkerSize', 5)
     shg
-    pause(t(i+1)-t(i));
+    pause((t(i+1)-t(i))/100);
     
 end
 end
