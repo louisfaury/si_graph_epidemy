@@ -27,7 +27,7 @@ for i=1:size(n,2)
     Adj     = ones(n(1,i),n(1,i)) - eye(n(1,i),n(1,i));
     
     for f=1:fold
-        [t, ~, ~] = simulateEvolution(n(1,i), x0, Adj, lambda);
+        [t, ~, ~] = simulateEvolutionSI(n(1,i), x0, Adj, lambda);
         totalTime(f, i) = t(end,1);
     end
     
@@ -57,7 +57,7 @@ clear;
 
 %% Constants definition
 n       = 100;                             %tested population size
-fold    = 10000;                            %number of tests
+fold    = 10000;                           %number of tests
 lambda  = 1;                               %contamination intensity
 x0      = 1;                               %initial number of infected nodes
 
@@ -71,7 +71,7 @@ Adj     = ones(n,n) - eye(n,n);
 
 for f=1:fold
     disp(f)
-    [t, ~, ~] = simulateEvolution(n, x0, Adj, lambda);
+    [t, ~, ~] = simulateEvolutionSI(n, x0, Adj, lambda);
     totalTime(1, f) = t(end,1);
     
 end

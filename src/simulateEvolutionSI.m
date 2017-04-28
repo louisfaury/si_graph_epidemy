@@ -1,4 +1,4 @@
-function [t, states, infectEdge] = simulateEvolution(n, x0, Adj, lambda)
+function [t, states, infectEdge] = simulateEvolutionSI(n, x0, Adj, lambda)
 
 % Initialize variables
 nEvents    = n-x0;                      %number of events
