@@ -8,7 +8,7 @@ n               = 500;          %number of nodes
 nCommunities    = 5;            %number of communities
 beta            = 0.25;         %contamination intensity
 delta           = 0.5;          %remission intensity
-x0              = 500;          %initial number of infected nodes
+x0              = 100;          %initial number of infected nodes
 propEdge        = 0.3;          %proportion of edges inside clusters
 
 %% Building graph (sparse topology)
@@ -53,7 +53,7 @@ for i=1:nEvents
     end
     
     shg
-    pause((t(i+1)-t(i))/10);
+    pause(10*(t(i+1)-t(i)));
     
 end
 

@@ -38,7 +38,6 @@ meanTime = mean(totalTime,1);
 varTime  = var(totalTime, 1);
 
 
-
 %% Plot results
 figure 
 set(0,'defaulttextInterpreter','latex')
@@ -47,6 +46,9 @@ xlabel('n');
 ylabel('T')
 grid minor
 title('$E[T] = f(n)$')
+
+% TODO : add shade for +-std
+% Linear regression for lambda -> check with reality 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                       %%   
