@@ -2,6 +2,8 @@ clc;
 clear;
 close all;
 
+%% Do you want to record ?
+recordFlag = 1;
 
 %% Constants definition
 n       = 100;     %number of nodes
@@ -26,10 +28,17 @@ p1 = plot(G, '-.o','NodeLabel',{}, 'EdgeAlpha', 0.1,  'NodeColor', 'b', 'MarkerS
 [t, states, infectEdge] = simulateEvolutionSI(n, x0, Adj, lambda);
 
 %% Movie
-displayScenario(G, t, nEvents, states, infectEdge)
+displayScenario(G, t, nEvents, states, infectEdge, recordFlag)
 
 
-function [] = displayScenario(G, t, nEvents, states, infectEdge)
+function [] = displayScenario(G, t, nEvents, states, infectEdge, recordFlag)
+
+if recordFlag 
+    video = VideoWriter('completeGraph.avi');
+    %video.CompressionRatio = 100;
+    video.FrameRate = 10;
+    open(video);
+end
 
 for i=1:nEvents
     clf
@@ -44,7 +53,23 @@ for i=1:nEvents
     highlight(p, infectEdge(i,:), 'NodeColor', [1 .5 0], 'EdgeColor',[1 1 0], 'LineWidth', 4, 'MarkerSize', 5)
     highlight(p, infectEdge(i,1), 'NodeColor','r', 'MarkerSize', 5)
     shg
-    pause((t(i+1)-t(i))/100);
     
+    if recordFlag
+          counter = round((t(i+1)-t(i))*video.FrameRate);
+          for k=1:counter
+            frame = getframe(gcf);
+            writeVideo(video,frame);
+          end
+    end
+    
+    pause((t(i+1)-t(i))/10);
+        
 end
+
+if recordFlag
+    close(video)
+end
+
+
+    
 end

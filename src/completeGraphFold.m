@@ -2,6 +2,8 @@ clc;
 clear;
 close all;
 
+set(0,'defaulttextInterpreter','latex')
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                       %%   
@@ -10,8 +12,8 @@ close all;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Constants definition
-n       = round(logspace(1, 3, 100));      %tested population cardinals
-fold    = 30;                              %number of tests per n value
+n       = round(logspace(1, 3, 10));      %tested population cardinals
+fold    = 100;                              %number of tests per n value
 lambda  = 1;                               %contamination intensity
 x0      = 1;                               %initial number of infected nodes
 
@@ -36,12 +38,14 @@ end
 %% Compute contamination time mean
 meanTime = mean(totalTime,1);
 varTime  = var(totalTime, 1);
-
+stdTime  = sqrt(varTime);
 
 %% Plot results
 figure 
 set(0,'defaulttextInterpreter','latex')
+set(gca, 'FontSize', 14)
 semilogx(n, meanTime, 'b', 'LineWidth', 2);
+jbfill(n,meanTime-stdTime,meanTime+stdTime,'r','r',1,0.3)
 xlabel('n');
 ylabel('T')
 grid minor
@@ -85,8 +89,34 @@ fluct    = totalTime - meanTime;
 
 %% Plot histogram
 figure
-set(0,'defaulttextInterpreter','latex')
-hist(fluct, 100);
+set(gca, 'FontSize', 14)
+h = histogram(fluct, 100);
 xlabel('flucutation')
 ylabel('frequency')
 title('Histogram of flucations ($n=100, \quad \lambda = 1$)')
+
+
+%% Compute cumulative distribution
+cdf = zeros(1, size(h.BinCounts, 2));
+abs = zeros(1, size(h.BinCounts, 2));
+cdf(1,1) = h.BinCounts(1, 1);
+abs(1,1) = h.BinEdges(1, 1)+0.5*h.BinWidth;
+for i=2:size(cdf,2)
+    cdf(i) = cdf(1, i-1)+h.BinCounts(1, i);
+    abs(i) = h.BinEdges(1, i)+0.5*h.BinWidth;
+end
+
+% Normalization
+cdf = cdf/cdf(1,end);
+
+oneMinusCdf = ones(size(cdf))-cdf;
+
+% Plot
+figure
+grid minor
+set(gca, 'FontSize', 16)
+plot(abs, oneMinusCdf, 'LineWidth', 2);
+xlabel('t')
+ylabel('P($S_n \geq t$)')
+title('P($S_n \geq t$) = f(t)')
+

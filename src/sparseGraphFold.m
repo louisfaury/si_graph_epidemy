@@ -13,7 +13,7 @@ close all;
 
 
 %% Constants definition
-fold            = 100;                   %number of iterations per config
+fold            = 500;                   %number of iterations per config
 n               = round(logspace(2,3,20));  % list of tested population sizes
 nCommunities    = 8;                    %number of communities
 beta            = 0.025;                 %contamination intensity
@@ -52,6 +52,7 @@ varTime  = var(totalTime, 1);
 %% Plot results
 figure 
 plot(n, meanTime, 'b', 'LineWidth', 2);
+set(gca, 'FontSize', 14)
 set(0,'defaulttextInterpreter','latex')
 xlabel('n');
 ylabel('T')
@@ -66,7 +67,7 @@ grid minor
 clear;
 
 %% Constants definition
-fold            = 10
+fold            = 100;
 0;                   %number of iterations per config
 R               = 1:1:25;  % list of tested spectral radius
 n               = 500; 
@@ -108,6 +109,7 @@ varTime  = var(totalTime, 1);
 %% Plot results
 figure 
 set(0,'defaulttextInterpreter','latex')
+set(gca, 'FontSize', 14)
 plot(R, meanTime, 'b', 'LineWidth', 2);
 xlabel('$\rho$');
 ylabel('T')
