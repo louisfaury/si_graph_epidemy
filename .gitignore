@@ -4,6 +4,7 @@
 !src/
 src/*
 !*.m
+!src/*.avi
 
 !beamer
 beamer/*

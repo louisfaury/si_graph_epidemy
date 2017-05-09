@@ -8,7 +8,8 @@ infectEdge = zeros(1, 2);               %index of transmitter and receiver
 x          = x0;                        %number of infected notes
 
 % Select first contaminated edges
-list = randperm(n);
+%list = randperm(n);
+list = 1:n;
 states(1,list(1:x0)) = 1;
 
 

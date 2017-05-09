@@ -6,7 +6,7 @@ close all;
 recordFlag = 1;
 
 %% Constants definition
-n       = 100;     %number of nodes
+n       = 30;     %number of nodes
 lambda  = 1;        %contamination intensity
 x0      = 1;        %initial number of infected nodes
 nEvents = n-x0;     %number of events that will occur (number of contaminations)
