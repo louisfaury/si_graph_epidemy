@@ -40,19 +40,23 @@ meanTime = mean(totalTime,1);
 varTime  = var(totalTime, 1);
 stdTime  = sqrt(varTime);
 
+%% Linear regression over lambda 
+P = [log(n)',ones(size(log(n)'))];
+lambda = 2 / ( [1 0]* ((P'*P)\(P'*meanTime'))) ; % <- normal equations 
+disp(lambda);
+
 %% Plot results
 figure 
 set(0,'defaulttextInterpreter','latex')
 set(gca, 'FontSize', 14)
-semilogx(n, meanTime, 'b', 'LineWidth', 2);
-jbfill(n,meanTime-stdTime,meanTime+stdTime,'r','r',1,0.3)
-xlabel('n');
-ylabel('T')
+a = semilogx(n, meanTime, 'b', 'LineWidth', 2);
+b = jbfill(n,meanTime-stdTime,meanTime+stdTime,'r','r',1,0.3);
+xlabel('n','FontSize',14);
+ylabel('E(T)','FontSize',14)
 grid minor
-title('$E[T] = f(n)$')
-
-% TODO : add shade for +-std
-% Linear regression for lambda -> check with reality 
+title('$E[T] = f(log(n))$','FontSize',15,'FontWeight','bold','interpreter','latex')
+h = legend([a,b],{'Mean fold value','Std fold tube'},'Location','southeast');
+set(h,'FontSize',14);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                       %%   
@@ -91,9 +95,8 @@ fluct    = totalTime - meanTime;
 figure
 set(gca, 'FontSize', 14)
 h = histogram(fluct, 100);
-xlabel('flucutation')
-ylabel('frequency')
-title('Histogram of flucations ($n=100, \quad \lambda = 1$)')
+xlabel('Flucutation','FontSize',14)
+title('Histogram representation of the fluctuation distribution ($n=100, \quad \lambda = 1$)','FontSize',14)
 
 
 %% Compute cumulative distribution
@@ -116,7 +119,7 @@ figure
 grid minor
 set(gca, 'FontSize', 16)
 plot(abs, oneMinusCdf, 'LineWidth', 2);
-xlabel('t')
-ylabel('P($S_n \geq t$)')
-title('P($S_n \geq t$) = f(t)')
+xlabel('t','FontSize',14)
+ylabel('P($S_n \geq t$)','FontSize',14)
+title('P($S_n \geq t$) = f(t)','FontSize',14)
 

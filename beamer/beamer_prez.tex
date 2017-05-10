@@ -2,6 +2,7 @@
 
 %% ----------------------------------------------------- PACKAGES ----------------------------------------------------- %%
 \usepackage{coolPrez}
+\usepackage{multimedia}
 \bibliography{bibfile.bib}
 %% ---------------------------------------------------- DOCUMENT ---------------------------------------------------- %%
 
@@ -140,7 +141,7 @@
 			
 			$\blacksquare$ Large population limit : 
 			\begin{equation}
-				\E{T_n} = \frac{2}{\lambda}(2\log(n) + 2\gamma + o(1))
+				\E{T_n} = \frac{2}{\lambda}(\log(n) + \gamma + o(1))
 			\end{equation}
 			scales with $\log(n)$ !\\
 			
@@ -154,8 +155,39 @@
 		
 		\frame[t]
 		{
-			TODO : simulation explanation \& results
+			$\blacksquare$ Simulation 
+			\begin{center}
+				\movie[width=6cm,height=6cm,poster,autostart,borderwidth=1pt,loop]{}{complete_graph.avi}
+			\end{center}
+			\vspace{10pt}
+			Hyper-parameters : $n=30$, $\lambda=1$. 
 		}
+		
+		\frame[t]
+		{
+			$\blacksquare$ Simulation 
+			\begin{figure}[h!]
+				\begin{center}
+					\includegraphics[width=0.5\linewidth]{complete_infection_time}
+					\caption{Mean infection time as a function of $\vert V \vert$}
+				\end{center}
+			\end{figure}
+			$\lambda =1$ and $\lambda_{MLE} = 0.94$ ! 
+		}
+		
+		\frame[t]
+		{
+			$\blacksquare$ Simulation 
+			\begin{figure}[h!]
+				\begin{center}
+					\includegraphics[width=0.5\linewidth]{fluctuation_db}
+					\caption{Fluctuation distribution : $\mathbb{P}(S_n\geq t)$} 
+				\end{center}
+			\end{figure}
+			
+			\hspace{40pt} $\color{red}\boldsymbol{\rightarrow}$ Exponentially bounded tail
+		}
+
 	}
 }
 
@@ -244,6 +276,18 @@
 			\end{itemize}
 		}
 		
+		\frame[t]
+		{
+			$\blacksquare$ Simulation : 
+			
+			\begin{center}
+				\movie[width=6cm,height=6cm,poster,autostart,borderwidth=1pt,loop]{}{sparse_graph.avi}
+			\end{center}
+			\vspace{10pt}
+			Hyper-Parameters : $\delta$  = 0.5, $\beta = 0.25$
+		}
+
+			
 		\frame[t]
 		{
 			$\blacksquare$ SIS (Susceptible-Infected-Susceptible approach) on general topology: 
