@@ -13,7 +13,7 @@ close all;
 
 
 %% Constants definition
-fold            = 500;                   %number of iterations per config
+fold            = 100;                   %number of iterations per config
 n               = round(logspace(2,3,20));  % list of tested population sizes
 nCommunities    = 8;                    %number of communities
 beta            = 0.025;                 %contamination intensity
@@ -46,18 +46,20 @@ end
 %% Compute contamination time mean
 meanTime = mean(totalTime,1);
 varTime  = var(totalTime, 1);
-
-
+stdTime = sqrt(varTime);
 
 %% Plot results
 figure 
-plot(n, meanTime, 'b', 'LineWidth', 2);
+a = plot(n, meanTime, 'b', 'LineWidth', 2);
+b = jbfill(n,meanTime-stdTime,meanTime+stdTime,'r','r',1,0.3);
 set(gca, 'FontSize', 14)
 set(0,'defaulttextInterpreter','latex')
 xlabel('n');
 ylabel('T')
 title('$E[T] = f(n)$')
 grid minor
+h = legend([a,b],{'Mean fold value','Std fold tube'},'Location','southeast');
+set(h,'FontSize',14);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                       %%   
@@ -67,9 +69,8 @@ grid minor
 clear;
 
 %% Constants definition
-fold            = 100;
-0;                   %number of iterations per config
-R               = 1:1:25;  % list of tested spectral radius
+fold            = 100;                  %number of iterations per config
+R               = 1:2:25;               % list of tested spectral radius
 n               = 500; 
 nCommunities    = 4;                    %number of communities
 beta            = 0.05;                 %contamination intensity

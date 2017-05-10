@@ -8,7 +8,7 @@ recordFlag = 1;
 %% Constants definition
 n               = 500;          %number of nodes
 nCommunities    = 5;            %number of communities
-beta            = 0.5;         %contamination intensity
+beta            = 0.5;          %contamination intensity
 delta           = 0.5;          %remission intensity
 x0              = 100;          %initial number of infected nodes
 propEdge        = 0.3;          %proportion of edges inside clusters

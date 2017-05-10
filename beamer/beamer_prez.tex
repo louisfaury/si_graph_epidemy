@@ -13,7 +13,7 @@
 \author[Louis Faury\& Gallois - Montbrun Grégoire]{Louis Faury\\ Gallois - Montbrun Grégoire}
 \institute[MICRO506 - Stochastic Methods]{MICRO506 - Stochastic Methods}
 \newenvironment{subenv}{\only{\setbeamercolor{local structure}{fg=red}}}{}
-
+\titlegraphic{\includegraphics[width=0.5\linewidth]{title_pic}}
 \titlepage
 
 %1
@@ -159,7 +159,8 @@
 			\begin{center}
 				\movie[width=6cm,height=6cm,poster,autostart,borderwidth=1pt,loop]{}{complete_graph.avi}
 			\end{center}
-			\vspace{10pt}
+			\centering
+			\vspace{-10pt}
 			Hyper-parameters : $n=30$, $\lambda=1$. 
 		}
 		
@@ -283,11 +284,23 @@
 			\begin{center}
 				\movie[width=6cm,height=6cm,poster,autostart,borderwidth=1pt,loop]{}{sparse_graph.avi}
 			\end{center}
-			\vspace{10pt}
-			Hyper-Parameters : $\delta$  = 0.5, $\beta = 0.25$
+			\centering
+			\vspace{-10pt}
+			Hyper-Parameters : $\delta$  = 0.5, $\beta = 0.25$, $\rho_G\simeq 4$
 		}
 
+				\frame[t]
+		{
+			$\blacksquare$ Simulation : 
 			
+			\begin{center}
+				\movie[width=6cm,height=6cm,poster,autostart,borderwidth=1pt,loop]{}{sparse_graph_2.avi}
+			\end{center}
+			\centering
+			\vspace{-10pt}
+			Hyper-Parameters : $\delta$  = 0.5, $\beta = 0.5$, $\rho_G\simeq 4$
+		}
+		
 		\frame[t]
 		{
 			$\blacksquare$ SIS (Susceptible-Infected-Susceptible approach) on general topology: 
@@ -314,6 +327,20 @@
 			\end{itemize}
 
 		}
+		
+		\frame[t]
+		{
+			$\blacksquare$ Simulation 
+			\begin{figure}[h!]
+				\begin{center}
+					\includegraphics[width=0.5\linewidth]{absorbing_time}
+					\caption{Mean absorbing time as a function of $\vert V \vert$}
+				\end{center}
+			\end{figure}
+			\centering
+			$\delta =0.5$, $\beta = 0.025$, $\rho_G \leq 4$
+		}
+		
 	}
 	\subsection{Arbitrary graph topology}
 	{
