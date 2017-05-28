@@ -36,6 +36,7 @@
 				\item Once infected, an individual can't recover and tries to infect other individuals 
 				\item An individual can affect any other individual in the population (\textcolor{red}{uniform topology}) 
 			\end{itemize}
+			\pause
 			\vspace{30pt}
 			$\blacksquare$ Graph population representation : 
 				\begin{equation}
@@ -52,11 +53,12 @@
 			\vspace{20pt}
 			$\blacksquare$ Propagation :
 			\begin{itemize}
+				\setlength\itemsep{1em}
 				\item Each infected node tries to infect one of its neighbor at the times of a \textcolor{red}{Poisson process} of intensity $\lambda>0$. 
 				\item The node's Poisson processes are independent. 
 				\item An infected node picks one of its neighbor uniformly at random when trying to infect. 
 			\end{itemize}
-			
+			\pause
 			\vspace{30pt}
 			$\blacksquare$ Let $X_t$ the number of infected node at time $t>0$. \\
 			\hspace{30pt} $\to$ $\{X_t\}$ is a \textbf{Markov Jump Process} on $\mathbb{R}^+$. 
@@ -74,12 +76,16 @@
 					\begin{equation}
 						\lim_{t\to 0}p_{xx}(t) = 1
 					\end{equation}
+					\pause
 				\item The process remains at each stage for a strictly positive time with probability $1$. 
+				\pause
 				\item We define the jump process's  \textbf{infinitesimal generator} as, $\forall x\neq y\in E$ 
 				\begin{equation}
 					q_{xy}= \lim_{h\to 0} \frac{p_{xy}(h)}{h}
 				\end{equation}
+				\pause
 				\item It defines the process \textcolor{red}{transitions rates}
+				\pause
 				\item Ex : queuing systems !
 			\end{itemize}
 		}
@@ -96,7 +102,9 @@
 							&p_{x,x+1+i}(h) \propto h^i \quad \forall i >0
 						\end{aligned}
 					\end{equation}
+				\pause
 				\item Only non-zero transition rate is $q_{x,x+1}$
+				\pause
 				\item If $X_t = x>0$, the next time before an infection intent is a random variable defined as : 
 					\begin{equation}
 						\tau_x = \min_{i=1,\hdots,x} \eps_i \quad \text{ where } \eps_i \sim Exp(\lambda) \text{ (iid) }
@@ -113,11 +121,13 @@
 		$\blacksquare$ Back to our propagation model : 
 			\begin{itemize}
 				\item The transition succeeds if the node picks a suspectible neighbor, which happens with probability $\frac{n-x}{n-1}$ (uniform) 
+				\pause
 				\item Therefore : 
 					\boxedeq{red}
 					{
 						q_{x,x+1} = \lambda x \frac{n-x}{n-1}
 					}
+				\pause
 				\item Let $X_0=1$. The time before $m$ individuals are infected is defined as : 
 				\begin{equation}
 					T_m = \sum_{x=1}^{m-1} \frac{n-1}{\lambda x (n-x)} \eps_i
@@ -138,13 +148,13 @@
 			{
 				\E{T_n} = \sum_{x=1}^n \frac{n-1}{\lambda x(n-x)} 
 			}
-			
+			\pause
 			$\blacksquare$ Large population limit : 
 			\begin{equation}
 				\E{T_n} = \frac{2}{\lambda}(\log(n) + \gamma + o(1))
 			\end{equation}
 			scales with $\log(n)$ !\\
-			
+			\pause
 			$\blacksquare$ Fluctuation : if $S_n = \lambda(T_n - \E{T_n})$ : 
 			\begin{equation}
 				\mathbb{P}(S_n\geq t) \leq e^{-\theta t}C_\theta, \quad \forall\theta\in[0,\frac{1}{2}]
@@ -204,12 +214,15 @@
 			\begin{itemize}
 			\setlength\itemsep{2em}
 				\item Modelisation of simple epidemics in population 
+				\pause
 				\item Simplistic model : 
 					\begin{itemize}
 						\item<sub@1> Nodes can't recover from being infected 
 						\item<sub@1> A complete graph is not realistic 
 					\end{itemize}
+				\pause
 				\item What happens if we introduce recovering / dying nodes ? 
+				\pause
 				\item How does the topology of the graph impacts the last results ?
 			\end{itemize}
 		}
@@ -224,8 +237,11 @@
 				\begin{itemize}
 					\setlength\itemsep{2em}
 					\item Modelling a network of sensors / agents 
+					\pause
 					\item Each agent tries to pass a bit of information to all others 
+					\pause
 					\item Control over the time before every information has been propagated to every agent 
+					\pause
 					\item Previous results still holds : scales as $\log{n}$
 				\end{itemize}
 		}
@@ -257,7 +273,9 @@
 					\begin{equation}
 						A = (\delta _{(v_i,v_j)\in E})_{i,j}
 					\end{equation}
+				\pause
 				\item $\{X(t)\}_t \in\{0,1\}^{\vert V \vert }$ our Markovian jump process. 
+				\pause
 				\item Let : 
 					\begin{equation}
 						\begin{aligned}
@@ -266,6 +284,7 @@
 							&e_i &=(\delta_{ji})_{j\in\{1,\hdots,V\}} 
 						\end{aligned}
 					\end{equation}
+				\pause
 				\item Then the only non-zero infinitesimal generators are : 
 					\begin{equation}
 						\left\{
@@ -275,6 +294,35 @@
 						\end{aligned}\right.
 					\end{equation}
 			\end{itemize}
+		}
+				
+		\frame[t]
+		{
+			$\blacksquare$ SIS (Susceptible-Infected-Susceptible approach) on general topology: 
+			\vspace{5pt}
+			\begin{itemize}
+				\item $0^V$ is an \textcolor{red}{absorbant state} $\leftarrow$ time for absorption ? 
+				\pause
+				\item Spectral radius of the graph : 
+					\begin{equation}
+						\rho_G = \max_{\lambda\in Sp(A)} \vert \lambda \vert 
+					\end{equation}
+				\pause
+				\item \textbf{Main absorption result} : If the graph is \emph{finite} and $t>0$
+				\begin{equation}
+					\mathbb{P}(T>t) \leq ne^{t(\beta \rho - \delta)}
+				\end{equation}
+				hence if $\color{red} \boldsymbol{\beta}\boldsymbol{\rho}_G \leq \boldsymbol{\delta}$
+				\boxedeq{red}
+				{
+					\begin{aligned}
+						\E{T} &= \int_{0}^{+\infty} \mathbb{P}(T>t)dt \\
+							 &\leq \frac{\log{n}+1}{\delta - \beta \rho_G}
+					\end{aligned}
+				}
+				
+			\end{itemize}
+
 		}
 		
 		\frame[t]
@@ -300,34 +348,8 @@
 			\vspace{-10pt}
 			Hyper-Parameters : $\delta$  = 0.5, $\beta = 0.5$, $\rho_G\simeq 4$
 		}
-		
-		\frame[t]
-		{
-			$\blacksquare$ SIS (Susceptible-Infected-Susceptible approach) on general topology: 
-			\vspace{5pt}
-			\begin{itemize}
-				\item $0^V$ is an \textcolor{red}{absorbant state} $\leftarrow$ time for absorption ? 
-				\item Spectral radius of the graph : 
-					\begin{equation}
-						\rho_G = \max_{\lambda\in Sp(A)} \vert \lambda \vert 
-					\end{equation}
-				\item \textbf{Main absorption result} : If the graph is \emph{finite} and $t>0$
-				\begin{equation}
-					\mathbb{P}(T>t) \leq ne^{t(\beta \rho - \delta)}
-				\end{equation}
-				hence if $\color{red} \boldsymbol{\beta}\boldsymbol{\rho}_G \leq \boldsymbol{\delta}$
-				\boxedeq{red}
-				{
-					\begin{aligned}
-						\E{T} &= \int_{0}^{+\infty} \mathbb{P}(T>t)dt \\
-							 &\leq \frac{\log{n}+1}{\delta - \beta \rho_G}
-					\end{aligned}
-				}
-				
-			\end{itemize}
 
-		}
-		
+
 		\frame[t]
 		{
 			$\blacksquare$ Simulation 
@@ -354,8 +376,11 @@
 				\begin{equation}
 					\eta_m(G)=  \inf_{S\subset V,\, \vert S\vert \leq m} \left\{\displaystyle \frac{\vert E(S,\bar{S})\vert }{\vert S \vert}\right\}
 				\end{equation}
+				\pause
 				\item Derive results of control for many different topologies (complete, hypercube, Erdos-Renyi's,$\hdots$)
+				\pause
 				\item Model a \emph{volatile information} propagation on various network topologies 
+				\pause
 				\item Paves the way for SIR model
 			\end{itemize}
 		}
